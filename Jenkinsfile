@@ -9,8 +9,7 @@ pipeline {
         stage("code-checkout") {
             steps {
                 script {
-                    git url: "https://github.com/ash2code/simple-java-maven-app.git",
-                    branch: "master"
+                    git url: "https://github.com/ash2code/simple-java-maven-app.git", branch: "master"
                 }
             }
         }
@@ -23,15 +22,25 @@ pipeline {
             }
         }
 
-        stage ("code-test") {
+        stage("code-test") {
             steps {
                 script {
                     sh "mvn test"
                 }
             }
         }
+
+        stage("Sonar-Analysis") {
+            steps {
+                withSonarQubeEnv('sonarqube-analysis') {
+                    sh '''mvn clean verify sonar:sonar \
+                       -Dsonar.projectKey=java-demo \
+                       -Dsonar.projectName='java-demo' \
+                       -Dsonar.host.url=http://54.82.198.143:9000 \
+                       -Dsonar.login=sqp_d01fd5f4d7f7e063efdda1b72001979cd16a24f6'''
+                }
+            }
+        }
     }
 }
-
-
-       
+     
