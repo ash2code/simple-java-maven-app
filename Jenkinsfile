@@ -49,8 +49,14 @@ pipeline {
                 }
             }
         }
+
+        stage("Docker-Push") {
+            steps {
+                script {
+                    sh "docker push ash2code/mvn-project "
+                }
+            }
+        }
     }
 }
-     
-   
      
