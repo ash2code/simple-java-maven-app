@@ -10,26 +10,5 @@ pipeline {
                 }
             }
         }
-
-        stage("build") {
-            steps {
-                sh "mvn clean package"
-            }
-        }
-
-        stage("test") {
-            steps {
-                sh "mvn test"
-            }
-        }
-
-    post {
-        success {
-            echo "Pipeline succeeded! You can deploy now."
-        }
-        failure {
-            echo "Pipeline failed. Please check logs for details."
-        }
     }
 }
-
