@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven "m3"
+    }
+
     stages {
         stage("code-checkout") {
             steps {
@@ -10,5 +14,24 @@ pipeline {
                 }
             }
         }
+
+        stage("code-build") {
+            steps {
+                script {
+                    sh "mvn clean package"
+                }
+            }
+        }
+
+        stage ("code-test") {
+            steps {
+                script {
+                    sh "mvn test"
+                }
+            }
+        }
     }
 }
+
+
+       
