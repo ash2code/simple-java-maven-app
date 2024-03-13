@@ -1,5 +1,5 @@
 # Use a lightweight Java runtime image
-FROM adoptopenjdk/openjdk17:alpine-slim
+FROM adoptopenjdk
 
 # Set the working directory in the container
 WORKDIR /app
